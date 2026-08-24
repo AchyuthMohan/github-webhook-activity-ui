@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>GitHub Webhook Dashboard</title>
+  <title>Redshify Git Watch</title>
   <style>
     * {
       margin: 0;
@@ -12,17 +12,18 @@
     }
 
     :root {
-      --bg-primary: #0d1117;
-      --bg-secondary: #161b22;
-      --bg-tertiary: #21262d;
-      --border-color: #30363d;
-      --text-primary: #c9d1d9;
-      --text-secondary: #8b949e;
-      --accent-blue: #58a6ff;
-      --accent-green: #3fb950;
-      --accent-purple: #a371f7;
-      --accent-orange: #d29922;
-      --accent-red: #f85149;
+      --bg-primary: #0f1b2a;
+      --bg-secondary: #1a242f;
+      --bg-tertiary: #232f3e;
+      --border-color: #3b4a5a;
+      --text-primary: #f2f3f3;
+      --text-secondary: #a1a9b3;
+      --accent-orange: #ff9900;
+      --accent-blue: #00a1c9;
+      --accent-green: #1e8900;
+      --accent-purple: #ac68f5;
+      --accent-red: #d13212;
+      --accent-yellow: #f2c744;
     }
 
     body {
@@ -55,9 +56,8 @@
     }
 
     .logo svg {
-      width: 32px;
-      height: 32px;
-      fill: var(--text-primary);
+      width: 40px;
+      height: 40px;
     }
 
     .logo h1 {
@@ -119,10 +119,10 @@
       font-weight: 600;
     }
 
+    .stat-card.orange .value { color: var(--accent-orange); }
     .stat-card.blue .value { color: var(--accent-blue); }
     .stat-card.green .value { color: var(--accent-green); }
     .stat-card.purple .value { color: var(--accent-purple); }
-    .stat-card.orange .value { color: var(--accent-orange); }
 
     /* Charts Section */
     .charts-section {
@@ -183,13 +183,13 @@
       transition: width 0.5s ease;
     }
 
-    .bar.push { background: var(--accent-green); }
+    .bar.push { background: var(--accent-orange); }
     .bar.pull_request { background: var(--accent-blue); }
-    .bar.issues { background: var(--accent-orange); }
+    .bar.issues { background: var(--accent-yellow); }
     .bar.ping { background: var(--accent-purple); }
-    .bar.create { background: #39d353; }
+    .bar.create { background: var(--accent-green); }
     .bar.delete { background: var(--accent-red); }
-    .bar.default { background: var(--text-secondary); }
+    .bar.default { background: var(--accent-orange); }
 
     .bar-value {
       width: 50px;
@@ -210,7 +210,7 @@
 
     .activity-bar {
       flex: 1;
-      background: var(--accent-blue);
+      background: var(--accent-orange);
       border-radius: 4px 4px 0 0;
       min-height: 4px;
       transition: height 0.5s ease;
@@ -284,18 +284,18 @@
     .filter-group input:focus,
     .filter-group select:focus {
       outline: none;
-      border-color: var(--accent-blue);
+      border-color: var(--accent-orange);
     }
 
     .filter-btn {
-      background: var(--accent-blue);
+      background: var(--accent-orange);
       border: none;
-      color: #fff;
+      color: #0f1b2a;
       padding: 8px 20px;
       border-radius: 6px;
       cursor: pointer;
       font-size: 0.875rem;
-      font-weight: 500;
+      font-weight: 600;
       transition: opacity 0.2s;
     }
 
@@ -374,12 +374,12 @@
       font-weight: 500;
     }
 
-    .event-type-badge.push { background: rgba(63, 185, 80, 0.2); color: var(--accent-green); }
-    .event-type-badge.pull_request { background: rgba(88, 166, 255, 0.2); color: var(--accent-blue); }
-    .event-type-badge.issues { background: rgba(210, 153, 34, 0.2); color: var(--accent-orange); }
-    .event-type-badge.ping { background: rgba(163, 113, 247, 0.2); color: var(--accent-purple); }
-    .event-type-badge.create { background: rgba(57, 211, 83, 0.2); color: #39d353; }
-    .event-type-badge.delete { background: rgba(248, 81, 73, 0.2); color: var(--accent-red); }
+    .event-type-badge.push { background: rgba(255, 153, 0, 0.2); color: var(--accent-orange); }
+    .event-type-badge.pull_request { background: rgba(0, 161, 201, 0.2); color: var(--accent-blue); }
+    .event-type-badge.issues { background: rgba(242, 199, 68, 0.2); color: var(--accent-yellow); }
+    .event-type-badge.ping { background: rgba(172, 104, 245, 0.2); color: var(--accent-purple); }
+    .event-type-badge.create { background: rgba(30, 137, 0, 0.2); color: var(--accent-green); }
+    .event-type-badge.delete { background: rgba(209, 50, 18, 0.2); color: var(--accent-red); }
 
     .avatar {
       width: 24px;
@@ -390,7 +390,7 @@
     }
 
     .repo-link {
-      color: var(--accent-blue);
+      color: var(--accent-orange);
       text-decoration: none;
     }
 
@@ -449,8 +449,9 @@
     }
 
     .page-btn.active {
-      background: var(--accent-blue);
-      border-color: var(--accent-blue);
+      background: var(--accent-orange);
+      border-color: var(--accent-orange);
+      color: #0f1b2a;
     }
 
     .page-info {
@@ -482,7 +483,7 @@
 
     .repo-card h4 {
       font-size: 1rem;
-      color: var(--accent-blue);
+      color: var(--accent-orange);
     }
 
     .repo-card .owner {
@@ -632,6 +633,444 @@
       word-break: break-all;
     }
 
+    /* Enhanced Modal Styles */
+    .event-hero {
+      background: linear-gradient(135deg, var(--bg-tertiary) 0%, var(--bg-primary) 100%);
+      border-radius: 12px;
+      padding: 24px;
+      margin-bottom: 24px;
+      border: 1px solid var(--border-color);
+    }
+
+    .event-hero-header {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+
+    .event-hero-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .event-hero-icon.push { background: rgba(255, 153, 0, 0.2); color: var(--accent-orange); }
+    .event-hero-icon.pull_request { background: rgba(0, 161, 201, 0.2); color: var(--accent-blue); }
+    .event-hero-icon.issues { background: rgba(242, 199, 68, 0.2); color: var(--accent-yellow); }
+    .event-hero-icon.ping { background: rgba(172, 104, 245, 0.2); color: var(--accent-purple); }
+    .event-hero-icon.create { background: rgba(30, 137, 0, 0.2); color: var(--accent-green); }
+    .event-hero-icon.delete { background: rgba(209, 50, 18, 0.2); color: var(--accent-red); }
+
+    .event-hero-icon svg {
+      width: 24px;
+      height: 24px;
+    }
+
+    .event-hero-title {
+      flex: 1;
+    }
+
+    .event-hero-title h2 {
+      font-size: 1.25rem;
+      margin-bottom: 4px;
+    }
+
+    .event-hero-title p {
+      color: var(--text-secondary);
+      font-size: 0.875rem;
+    }
+
+    .event-meta-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 16px;
+    }
+
+    .event-meta-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .event-meta-item svg {
+      width: 16px;
+      height: 16px;
+      color: var(--text-secondary);
+      flex-shrink: 0;
+    }
+
+    .event-meta-item .label {
+      font-size: 0.75rem;
+      color: var(--text-secondary);
+      text-transform: uppercase;
+    }
+
+    .event-meta-item .value {
+      font-size: 0.875rem;
+      color: var(--text-primary);
+    }
+
+    /* User Card */
+    .user-card {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: var(--bg-tertiary);
+      padding: 12px 16px;
+      border-radius: 8px;
+      border: 1px solid var(--border-color);
+    }
+
+    .user-card img {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+    }
+
+    .user-card-info h4 {
+      font-size: 0.9rem;
+      margin-bottom: 2px;
+    }
+
+    .user-card-info p {
+      font-size: 0.75rem;
+      color: var(--text-secondary);
+    }
+
+    .user-card a {
+      color: var(--accent-orange);
+      text-decoration: none;
+    }
+
+    .user-card a:hover {
+      text-decoration: underline;
+    }
+
+    /* Section Card */
+    .detail-section {
+      margin-bottom: 24px;
+    }
+
+    .detail-section-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 12px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .detail-section-header svg {
+      width: 18px;
+      height: 18px;
+      color: var(--text-secondary);
+    }
+
+    .detail-section-header h3 {
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+
+    .detail-section-header .count {
+      background: var(--bg-tertiary);
+      padding: 2px 8px;
+      border-radius: 10px;
+      font-size: 0.75rem;
+      color: var(--text-secondary);
+    }
+
+    /* Commit Card */
+    .commit-card {
+      background: var(--bg-tertiary);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 16px;
+      margin-bottom: 12px;
+    }
+
+    .commit-card:last-child {
+      margin-bottom: 0;
+    }
+
+    .commit-header {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .commit-avatar {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: var(--bg-secondary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+      color: var(--text-secondary);
+      flex-shrink: 0;
+    }
+
+    .commit-info {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .commit-message {
+      font-size: 0.9rem;
+      font-weight: 500;
+      margin-bottom: 4px;
+      word-break: break-word;
+    }
+
+    .commit-meta {
+      font-size: 0.75rem;
+      color: var(--text-secondary);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .commit-sha {
+      font-family: 'SF Mono', Monaco, monospace;
+      font-size: 0.75rem;
+      color: var(--accent-orange);
+      background: rgba(255, 153, 0, 0.1);
+      padding: 2px 8px;
+      border-radius: 4px;
+      text-decoration: none;
+    }
+
+    .commit-sha:hover {
+      background: rgba(255, 153, 0, 0.2);
+    }
+
+    /* File Changes */
+    .file-changes {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 12px;
+      padding-top: 12px;
+      border-top: 1px solid var(--border-color);
+    }
+
+    .file-change-group {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .file-change-label {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .file-change-label.added { color: var(--accent-green); }
+    .file-change-label.modified { color: var(--accent-orange); }
+    .file-change-label.removed { color: var(--accent-red); }
+
+    .file-list {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .file-item {
+      font-family: 'SF Mono', Monaco, monospace;
+      font-size: 0.75rem;
+      color: var(--text-secondary);
+      padding: 4px 8px;
+      background: var(--bg-secondary);
+      border-radius: 4px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 300px;
+    }
+
+    .file-item.added { border-left: 2px solid var(--accent-green); }
+    .file-item.modified { border-left: 2px solid var(--accent-orange); }
+    .file-item.removed { border-left: 2px solid var(--accent-red); }
+
+    /* Stats Row */
+    .stats-row {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .stat-pill {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--bg-tertiary);
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+    }
+
+    .stat-pill svg {
+      width: 14px;
+      height: 14px;
+    }
+
+    .stat-pill.added svg { color: var(--accent-green); }
+    .stat-pill.modified svg { color: var(--accent-orange); }
+    .stat-pill.removed svg { color: var(--accent-red); }
+
+    /* Repository Card */
+    .repo-detail-card {
+      background: var(--bg-tertiary);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 16px;
+    }
+
+    .repo-detail-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .repo-detail-header svg {
+      width: 20px;
+      height: 20px;
+      color: var(--text-secondary);
+    }
+
+    .repo-detail-header h4 {
+      font-size: 1rem;
+    }
+
+    .repo-detail-header a {
+      color: var(--accent-orange);
+      text-decoration: none;
+    }
+
+    .repo-detail-header a:hover {
+      text-decoration: underline;
+    }
+
+    .repo-detail-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+    }
+
+    .repo-detail-meta span {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .repo-detail-meta svg {
+      width: 14px;
+      height: 14px;
+    }
+
+    /* Compare Link */
+    .compare-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--bg-tertiary);
+      border: 1px solid var(--accent-orange);
+      padding: 10px 16px;
+      border-radius: 8px;
+      color: var(--accent-orange);
+      text-decoration: none;
+      font-size: 0.875rem;
+      transition: background 0.2s;
+    }
+
+    .compare-link:hover {
+      background: var(--border-color);
+    }
+
+    .compare-link svg {
+      width: 16px;
+      height: 16px;
+    }
+
+    /* Tab System for Raw JSON */
+    .payload-tabs {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+
+    .payload-tab {
+      background: var(--bg-tertiary);
+      border: 1px solid var(--border-color);
+      padding: 6px 14px;
+      border-radius: 6px;
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .payload-tab:hover {
+      color: var(--text-primary);
+    }
+
+    .payload-tab.active {
+      background: var(--accent-orange);
+      border-color: var(--accent-orange);
+      color: #0f1b2a;
+    }
+
+    .payload-content {
+      display: none;
+    }
+
+    .payload-content.active {
+      display: block;
+    }
+
+    /* Webhook Info */
+    .webhook-info {
+      background: var(--bg-primary);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 12px 16px;
+      margin-top: 16px;
+    }
+
+    .webhook-info-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 6px 0;
+      font-size: 0.8rem;
+    }
+
+    .webhook-info-row:not(:last-child) {
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .webhook-info-row .label {
+      color: var(--text-secondary);
+    }
+
+    .webhook-info-row .value {
+      color: var(--text-primary);
+      font-family: 'SF Mono', Monaco, monospace;
+    }
+
     /* Loading State */
     .loading {
       display: flex;
@@ -645,7 +1084,7 @@
       width: 24px;
       height: 24px;
       border: 2px solid var(--border-color);
-      border-top-color: var(--accent-blue);
+      border-top-color: var(--accent-orange);
       border-radius: 50%;
       animation: spin 1s linear infinite;
       margin-right: 12px;
@@ -684,10 +1123,22 @@
   <div class="container">
     <header>
       <div class="logo">
-        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-          <path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/>
+        <svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
+          <!-- Eye outline -->
+          <ellipse cx="20" cy="20" rx="16" ry="10" fill="none" stroke="#FF9900" stroke-width="2.5"/>
+          <!-- Iris -->
+          <circle cx="20" cy="20" r="6" fill="#FF9900"/>
+          <!-- Pupil with git branch -->
+          <circle cx="20" cy="20" r="2.5" fill="#0f1b2a"/>
+          <!-- Git branch lines -->
+          <line x1="20" y1="12" x2="20" y2="16" stroke="#FF9900" stroke-width="1.5" stroke-linecap="round"/>
+          <line x1="20" y1="24" x2="20" y2="28" stroke="#FF9900" stroke-width="1.5" stroke-linecap="round"/>
+          <circle cx="20" cy="11" r="1.5" fill="#FF9900"/>
+          <circle cx="20" cy="29" r="1.5" fill="#FF9900"/>
+          <!-- AWS smile -->
+          <path d="M8 28 Q20 34 32 28" fill="none" stroke="#FF9900" stroke-width="2" stroke-linecap="round"/>
         </svg>
-        <h1>GitHub Webhook Dashboard</h1>
+        <h1>Redshift Git Watchman</h1>
       </div>
       <button class="refresh-btn" onclick="refreshAll()">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -699,19 +1150,19 @@
 
     <!-- Stats Section -->
     <div class="stats-grid" id="stats-grid">
-      <div class="stat-card blue">
+      <div class="stat-card orange">
         <h3>Total Events</h3>
         <div class="value" id="stat-total">-</div>
       </div>
-      <div class="stat-card green">
+      <div class="stat-card blue">
         <h3>Unique Repositories</h3>
         <div class="value" id="stat-repos">-</div>
       </div>
-      <div class="stat-card purple">
+      <div class="stat-card green">
         <h3>Unique Senders</h3>
         <div class="value" id="stat-senders">-</div>
       </div>
-      <div class="stat-card orange">
+      <div class="stat-card purple">
         <h3>Events Today</h3>
         <div class="value" id="stat-today">-</div>
       </div>
@@ -1090,50 +1541,447 @@
         const response = await fetch(`${API_BASE}/events/${eventId}`);
         const result = await response.json();
         const event = result.data;
+        const payload = event.payload || {};
 
-        modalBody.innerHTML = `
-          <div class="event-detail-row">
-            <span class="event-detail-label">Event Type</span>
-            <span class="event-detail-value">
-              <span class="event-type-badge ${event.event_type}">${event.event_type}</span>
-              ${event.action ? `<span class="time-ago" style="margin-left: 8px">${event.action}</span>` : ''}
-            </span>
-          </div>
-          <div class="event-detail-row">
-            <span class="event-detail-label">Delivery ID</span>
-            <span class="event-detail-value">${event.delivery_id || '-'}</span>
-          </div>
-          <div class="event-detail-row">
-            <span class="event-detail-label">Repository</span>
-            <span class="event-detail-value">
-              <a href="${event.repository_url}" target="_blank" class="repo-link">${event.repository_full_name}</a>
-              ${event.repository_private ? '<span class="time-ago">(Private)</span>' : ''}
-            </span>
-          </div>
-          <div class="event-detail-row">
-            <span class="event-detail-label">Sender</span>
-            <span class="event-detail-value">
-              ${event.sender_avatar_url ? `<img src="${event.sender_avatar_url}" alt="" class="avatar">` : ''}
-              ${event.sender_login} (ID: ${event.sender_id})
-            </span>
-          </div>
-          <div class="event-detail-row">
-            <span class="event-detail-label">Hook ID</span>
-            <span class="event-detail-value">${event.hook_id || '-'}</span>
-          </div>
-          <div class="event-detail-row">
-            <span class="event-detail-label">Received At</span>
-            <span class="event-detail-value">${new Date(event.received_at).toLocaleString()}</span>
-          </div>
-          <div class="payload-section">
-            <h4>Payload</h4>
-            <pre class="payload-json">${JSON.stringify(event.payload, null, 2)}</pre>
-          </div>
-        `;
+        modalBody.innerHTML = renderEventDetails(event, payload);
+
+        // Setup tab switching
+        setupPayloadTabs();
       } catch (error) {
         console.error('Failed to load event:', error);
         modalBody.innerHTML = '<div class="empty-state">Failed to load event details</div>';
       }
+    }
+
+    // Render event details based on type
+    function renderEventDetails(event, payload) {
+      const eventType = event.event_type;
+
+      let html = renderEventHero(event, payload);
+
+      // Render type-specific content
+      switch(eventType) {
+        case 'push':
+          html += renderPushEvent(payload);
+          break;
+        case 'pull_request':
+          html += renderPullRequestEvent(payload);
+          break;
+        case 'issues':
+          html += renderIssuesEvent(payload);
+          break;
+        case 'ping':
+          html += renderPingEvent(payload);
+          break;
+        default:
+          html += renderGenericPayload(payload);
+      }
+
+      // Add webhook info
+      html += renderWebhookInfo(event);
+
+      // Add raw JSON toggle
+      html += renderRawJsonSection(payload);
+
+      return html;
+    }
+
+    // Render event hero section
+    function renderEventHero(event, payload) {
+      const icons = {
+        push: '<svg viewBox="0 0 16 16" fill="currentColor"><path d="M1 2.5A2.5 2.5 0 013.5 0h8.75a.75.75 0 01.75.75v3.5a.75.75 0 01-1.5 0V1.5h-8a1 1 0 00-1 1v6.708A2.492 2.492 0 013.5 9h3.25a.75.75 0 010 1.5H3.5a1 1 0 100 2h5.75a.75.75 0 010 1.5H3.5A2.5 2.5 0 011 11.5v-9zm13.23 7.79a.75.75 0 001.06-1.06l-2.505-2.505a.75.75 0 00-1.06 0L9.22 9.23a.75.75 0 001.06 1.06l1.22-1.22v6.18a.75.75 0 001.5 0V9.07l1.23 1.22z"/></svg>',
+        pull_request: '<svg viewBox="0 0 16 16" fill="currentColor"><path d="M1.5 3.25a2.25 2.25 0 113 2.122v5.256a2.251 2.251 0 11-1.5 0V5.372A2.25 2.25 0 011.5 3.25zm5.677-.177L9.573.677A.25.25 0 0110 .854V2.5h1A2.5 2.5 0 0113.5 5v5.628a2.251 2.251 0 11-1.5 0V5a1 1 0 00-1-1h-1v1.646a.25.25 0 01-.427.177L7.177 3.427a.25.25 0 010-.354zM3.75 2.5a.75.75 0 100 1.5.75.75 0 000-1.5zm0 9.5a.75.75 0 100 1.5.75.75 0 000-1.5zm8.25.75a.75.75 0 101.5 0 .75.75 0 00-1.5 0z"/></svg>',
+        issues: '<svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 9.5a1.5 1.5 0 100-3 1.5 1.5 0 000 3z"/><path d="M8 0a8 8 0 100 16A8 8 0 008 0zM1.5 8a6.5 6.5 0 1113 0 6.5 6.5 0 01-13 0z"/></svg>',
+        ping: '<svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 5.5a2.5 2.5 0 100 5 2.5 2.5 0 000-5zM4.5 8a3.5 3.5 0 117 0 3.5 3.5 0 01-7 0z"/><path d="M8 0a8 8 0 100 16A8 8 0 008 0zM1.5 8a6.5 6.5 0 1113 0 6.5 6.5 0 01-13 0z"/></svg>',
+        create: '<svg viewBox="0 0 16 16" fill="currentColor"><path d="M2 2.5A2.5 2.5 0 014.5 0h8.75a.75.75 0 01.75.75v12.5a.75.75 0 01-.75.75h-2.5a.75.75 0 110-1.5h1.75v-2h-8a1 1 0 00-.714 1.7.75.75 0 01-1.072 1.05A2.495 2.495 0 012 11.5v-9zm10.5-1V9h-8c-.356 0-.694.074-1 .208V2.5a1 1 0 011-1h8zM5 12.25v3.25a.25.25 0 00.4.2l1.45-1.087a.25.25 0 01.3 0L8.6 15.7a.25.25 0 00.4-.2v-3.25a.25.25 0 00-.25-.25h-3.5a.25.25 0 00-.25.25z"/></svg>',
+        delete: '<svg viewBox="0 0 16 16" fill="currentColor"><path d="M3.72 3.72a.75.75 0 011.06 0L8 6.94l3.22-3.22a.75.75 0 111.06 1.06L9.06 8l3.22 3.22a.75.75 0 11-1.06 1.06L8 9.06l-3.22 3.22a.75.75 0 01-1.06-1.06L6.94 8 3.72 4.78a.75.75 0 010-1.06z"/></svg>'
+      };
+
+      const titles = {
+        push: `Pushed to ${payload.ref?.replace('refs/heads/', '') || 'branch'}`,
+        pull_request: `Pull Request ${payload.action || ''}`,
+        issues: `Issue ${payload.action || ''}`,
+        ping: 'Webhook Ping',
+        create: `Created ${payload.ref_type || 'ref'}`,
+        delete: `Deleted ${payload.ref_type || 'ref'}`
+      };
+
+      const descriptions = {
+        push: `${payload.commits?.length || 0} commit(s) pushed`,
+        pull_request: payload.pull_request?.title || '',
+        issues: payload.issue?.title || '',
+        ping: 'Testing webhook connection',
+        create: payload.ref || '',
+        delete: payload.ref || ''
+      };
+
+      return `
+        <div class="event-hero">
+          <div class="event-hero-header">
+            <div class="event-hero-icon ${event.event_type}">
+              ${icons[event.event_type] || icons.ping}
+            </div>
+            <div class="event-hero-title">
+              <h2>${titles[event.event_type] || event.event_type}</h2>
+              <p>${descriptions[event.event_type] || ''}</p>
+            </div>
+            <span class="event-type-badge ${event.event_type}">${event.event_type}</span>
+          </div>
+          <div class="event-meta-grid">
+            <div class="event-meta-item">
+              <svg viewBox="0 0 16 16" fill="currentColor"><path d="M2 2.5A2.5 2.5 0 014.5 0h8.75a.75.75 0 01.75.75v12.5a.75.75 0 01-.75.75h-2.5a.75.75 0 110-1.5h1.75v-2h-8a1 1 0 00-.714 1.7.75.75 0 01-1.072 1.05A2.495 2.495 0 012 11.5v-9z"/></svg>
+              <div>
+                <div class="label">Repository</div>
+                <div class="value">${event.repository_full_name || '-'}</div>
+              </div>
+            </div>
+            <div class="event-meta-item">
+              <svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 0a8 8 0 110 16A8 8 0 018 0zM1.5 8a6.5 6.5 0 1013 0 6.5 6.5 0 00-13 0zm7-3.25v2.992l2.028.812a.75.75 0 01-.557 1.392l-2.5-1A.75.75 0 017 8.25v-3.5a.75.75 0 011.5 0z"/></svg>
+              <div>
+                <div class="label">Received</div>
+                <div class="value">${new Date(event.received_at).toLocaleString()}</div>
+              </div>
+            </div>
+            <div class="event-meta-item">
+              <svg viewBox="0 0 16 16" fill="currentColor"><path d="M10.561 8.073a6.005 6.005 0 00-3.122-3.122l1.16-1.707A7.505 7.505 0 0114 8c0 1.414-.39 2.736-1.067 3.867l-1.372-.945A6.005 6.005 0 008.073 10.56l-1.707 1.16A7.505 7.505 0 018 2c1.414 0 2.736.39 3.867 1.067L10.922 4.44A6.005 6.005 0 0010.56 8.073z"/></svg>
+              <div>
+                <div class="label">Delivery ID</div>
+                <div class="value" style="font-family: monospace; font-size: 0.8rem;">${event.delivery_id?.substring(0, 12) || '-'}...</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    // Render push event
+    function renderPushEvent(payload) {
+      const commits = payload.commits || [];
+      const pusher = payload.pusher || {};
+      const sender = payload.sender || {};
+      const repo = payload.repository || {};
+
+      let html = '';
+
+      // Pusher info
+      html += `
+        <div class="detail-section">
+          <div class="detail-section-header">
+            <svg viewBox="0 0 16 16" fill="currentColor"><path d="M10.5 5a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0zm.061 3.073a4 4 0 10-5.123 0 6.004 6.004 0 00-3.431 5.142.75.75 0 001.498.07 4.5 4.5 0 018.99 0 .75.75 0 101.498-.07 6.004 6.004 0 00-3.432-5.142z"/></svg>
+            <h3>Pushed By</h3>
+          </div>
+          <div class="user-card">
+            <img src="${sender.avatar_url || 'https://github.githubassets.com/images/gravatars/gravatar-user-420.png'}" alt="">
+            <div class="user-card-info">
+              <h4><a href="${sender.html_url || '#'}" target="_blank">${pusher.name || sender.login || 'Unknown'}</a></h4>
+              <p>${pusher.email || ''}</p>
+            </div>
+          </div>
+        </div>
+      `;
+
+      // Commits
+      if (commits.length > 0) {
+        html += `
+          <div class="detail-section">
+            <div class="detail-section-header">
+              <svg viewBox="0 0 16 16" fill="currentColor"><path d="M11.93 8.5a4.002 4.002 0 01-7.86 0H.75a.75.75 0 010-1.5h3.32a4.002 4.002 0 017.86 0h3.32a.75.75 0 010 1.5h-3.32zm-1.43-.75a2.5 2.5 0 10-5 0 2.5 2.5 0 005 0z"/></svg>
+              <h3>Commits</h3>
+              <span class="count">${commits.length}</span>
+            </div>
+            ${commits.map(commit => renderCommitCard(commit)).join('')}
+          </div>
+        `;
+      }
+
+      // Compare link
+      if (payload.compare) {
+        html += `
+          <div class="detail-section">
+            <a href="${payload.compare}" target="_blank" class="compare-link">
+              <svg viewBox="0 0 16 16" fill="currentColor"><path d="M9.573.677L7.177 3.073a.25.25 0 000 .354l2.396 2.396A.25.25 0 0010 5.646V4h1a1 1 0 011 1v5.628a2.251 2.251 0 101.5 0V5A2.5 2.5 0 0011 2.5h-1V.854a.25.25 0 00-.427-.177zM6 12v-1.646a.25.25 0 01.427-.177l2.396 2.396a.25.25 0 010 .354l-2.396 2.396A.25.25 0 016 15.146V13.5H5A2.5 2.5 0 012.5 11V5.372a2.251 2.251 0 111.5 0V11a1 1 0 001 1h1zm6.75.75a.75.75 0 100 1.5.75.75 0 000-1.5zM4 4.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0z"/></svg>
+              View Changes on GitHub
+            </a>
+          </div>
+        `;
+      }
+
+      // Repository info
+      html += renderRepoCard(repo);
+
+      return html;
+    }
+
+    // Render commit card
+    function renderCommitCard(commit) {
+      const author = commit.author || {};
+      const added = commit.added || [];
+      const modified = commit.modified || [];
+      const removed = commit.removed || [];
+      const hasChanges = added.length > 0 || modified.length > 0 || removed.length > 0;
+
+      return `
+        <div class="commit-card">
+          <div class="commit-header">
+            <div class="commit-avatar">${(author.name || 'U')[0].toUpperCase()}</div>
+            <div class="commit-info">
+              <div class="commit-message">${escapeHtml(commit.message?.split('\n')[0] || 'No message')}</div>
+              <div class="commit-meta">
+                <span>${author.name || 'Unknown'}</span>
+                <span>${formatTimeAgo(commit.timestamp)}</span>
+                <a href="${commit.url}" target="_blank" class="commit-sha">${commit.id?.substring(0, 7) || ''}</a>
+              </div>
+            </div>
+          </div>
+          ${hasChanges ? `
+            <div class="file-changes">
+              ${added.length > 0 ? `
+                <div class="file-change-group">
+                  <div class="file-change-label added">
+                    <svg width="12" height="12" viewBox="0 0 16 16" fill="currentColor"><path d="M7.75 2a.75.75 0 01.75.75V7h4.25a.75.75 0 110 1.5H8.5v4.25a.75.75 0 11-1.5 0V8.5H2.75a.75.75 0 010-1.5H7V2.75A.75.75 0 017.75 2z"/></svg>
+                    ${added.length} added
+                  </div>
+                  <div class="file-list">
+                    ${added.slice(0, 3).map(f => `<div class="file-item added" title="${f}">${getFileName(f)}</div>`).join('')}
+                    ${added.length > 3 ? `<div class="file-item">+${added.length - 3} more</div>` : ''}
+                  </div>
+                </div>
+              ` : ''}
+              ${modified.length > 0 ? `
+                <div class="file-change-group">
+                  <div class="file-change-label modified">
+                    <svg width="12" height="12" viewBox="0 0 16 16" fill="currentColor"><path d="M11.013 1.427a1.75 1.75 0 012.474 0l1.086 1.086a1.75 1.75 0 010 2.474l-8.61 8.61c-.21.21-.47.364-.756.445l-3.251.93a.75.75 0 01-.927-.928l.929-3.25a1.75 1.75 0 01.445-.758l8.61-8.61z"/></svg>
+                    ${modified.length} modified
+                  </div>
+                  <div class="file-list">
+                    ${modified.slice(0, 3).map(f => `<div class="file-item modified" title="${f}">${getFileName(f)}</div>`).join('')}
+                    ${modified.length > 3 ? `<div class="file-item">+${modified.length - 3} more</div>` : ''}
+                  </div>
+                </div>
+              ` : ''}
+              ${removed.length > 0 ? `
+                <div class="file-change-group">
+                  <div class="file-change-label removed">
+                    <svg width="12" height="12" viewBox="0 0 16 16" fill="currentColor"><path d="M3.72 3.72a.75.75 0 011.06 0L8 6.94l3.22-3.22a.75.75 0 111.06 1.06L9.06 8l3.22 3.22a.75.75 0 11-1.06 1.06L8 9.06l-3.22 3.22a.75.75 0 01-1.06-1.06L6.94 8 3.72 4.78a.75.75 0 010-1.06z"/></svg>
+                    ${removed.length} removed
+                  </div>
+                  <div class="file-list">
+                    ${removed.slice(0, 3).map(f => `<div class="file-item removed" title="${f}">${getFileName(f)}</div>`).join('')}
+                    ${removed.length > 3 ? `<div class="file-item">+${removed.length - 3} more</div>` : ''}
+                  </div>
+                </div>
+              ` : ''}
+            </div>
+          ` : ''}
+        </div>
+      `;
+    }
+
+    // Render repository card
+    function renderRepoCard(repo) {
+      if (!repo || !repo.full_name) return '';
+
+      return `
+        <div class="detail-section">
+          <div class="detail-section-header">
+            <svg viewBox="0 0 16 16" fill="currentColor"><path d="M2 2.5A2.5 2.5 0 014.5 0h8.75a.75.75 0 01.75.75v12.5a.75.75 0 01-.75.75h-2.5a.75.75 0 110-1.5h1.75v-2h-8a1 1 0 00-.714 1.7.75.75 0 01-1.072 1.05A2.495 2.495 0 012 11.5v-9z"/></svg>
+            <h3>Repository</h3>
+          </div>
+          <div class="repo-detail-card">
+            <div class="repo-detail-header">
+              <svg viewBox="0 0 16 16" fill="currentColor"><path d="M2 2.5A2.5 2.5 0 014.5 0h8.75a.75.75 0 01.75.75v12.5a.75.75 0 01-.75.75h-2.5a.75.75 0 110-1.5h1.75v-2h-8a1 1 0 00-.714 1.7.75.75 0 01-1.072 1.05A2.495 2.495 0 012 11.5v-9z"/></svg>
+              <h4><a href="${repo.html_url}" target="_blank">${repo.full_name}</a></h4>
+            </div>
+            <div class="repo-detail-meta">
+              <span>
+                <svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 .25a.75.75 0 01.673.418l1.882 3.815 4.21.612a.75.75 0 01.416 1.279l-3.046 2.97.719 4.192a.75.75 0 01-1.088.791L8 12.347l-3.766 1.98a.75.75 0 01-1.088-.79l.72-4.194L.818 6.374a.75.75 0 01.416-1.28l4.21-.611L7.327.668A.75.75 0 018 .25z"/></svg>
+                ${repo.stargazers_count || 0}
+              </span>
+              <span>
+                <svg viewBox="0 0 16 16" fill="currentColor"><path d="M5 5.372v.878c0 .414.336.75.75.75h4.5a.75.75 0 00.75-.75v-.878a2.25 2.25 0 111.5 0v.878a2.25 2.25 0 01-2.25 2.25h-1.5v2.128a2.251 2.251 0 11-1.5 0V8.5h-1.5A2.25 2.25 0 013.5 6.25v-.878a2.25 2.25 0 111.5 0z"/></svg>
+                ${repo.forks_count || 0}
+              </span>
+              <span>${repo.private ? 'Private' : 'Public'}</span>
+              <span>Branch: ${repo.default_branch || 'main'}</span>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    // Render pull request event
+    function renderPullRequestEvent(payload) {
+      const pr = payload.pull_request || {};
+      const sender = payload.sender || {};
+
+      return `
+        <div class="detail-section">
+          <div class="detail-section-header">
+            <svg viewBox="0 0 16 16" fill="currentColor"><path d="M1.5 3.25a2.25 2.25 0 113 2.122v5.256a2.251 2.251 0 11-1.5 0V5.372A2.25 2.25 0 011.5 3.25z"/></svg>
+            <h3>Pull Request</h3>
+          </div>
+          <div class="commit-card">
+            <div class="commit-message" style="font-size: 1rem; margin-bottom: 8px;">${escapeHtml(pr.title || 'Untitled')}</div>
+            <div class="commit-meta" style="margin-bottom: 12px;">
+              <span>#${pr.number || ''}</span>
+              <span>${pr.state || ''}</span>
+              <span>${pr.merged ? 'Merged' : ''}</span>
+            </div>
+            ${pr.body ? `<p style="color: var(--text-secondary); font-size: 0.875rem;">${escapeHtml(pr.body.substring(0, 200))}${pr.body.length > 200 ? '...' : ''}</p>` : ''}
+            <div class="stats-row" style="margin-top: 12px;">
+              <div class="stat-pill added"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M7.75 2a.75.75 0 01.75.75V7h4.25a.75.75 0 110 1.5H8.5v4.25a.75.75 0 11-1.5 0V8.5H2.75a.75.75 0 010-1.5H7V2.75A.75.75 0 017.75 2z"/></svg> +${pr.additions || 0}</div>
+              <div class="stat-pill removed"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M2 7.75A.75.75 0 012.75 7h10a.75.75 0 010 1.5h-10A.75.75 0 012 7.75z"/></svg> -${pr.deletions || 0}</div>
+              <div class="stat-pill"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M2 1.75C2 .784 2.784 0 3.75 0h6.586c.464 0 .909.184 1.237.513l2.914 2.914c.329.328.513.773.513 1.237v9.586A1.75 1.75 0 0113.25 16h-9.5A1.75 1.75 0 012 14.25V1.75z"/></svg> ${pr.changed_files || 0} files</div>
+            </div>
+          </div>
+        </div>
+        <div class="detail-section">
+          <a href="${pr.html_url}" target="_blank" class="compare-link">
+            <svg viewBox="0 0 16 16" fill="currentColor"><path d="M1.5 3.25a2.25 2.25 0 113 2.122v5.256a2.251 2.251 0 11-1.5 0V5.372A2.25 2.25 0 011.5 3.25z"/></svg>
+            View Pull Request on GitHub
+          </a>
+        </div>
+        ${renderRepoCard(payload.repository)}
+      `;
+    }
+
+    // Render issues event
+    function renderIssuesEvent(payload) {
+      const issue = payload.issue || {};
+
+      return `
+        <div class="detail-section">
+          <div class="detail-section-header">
+            <svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 9.5a1.5 1.5 0 100-3 1.5 1.5 0 000 3z"/></svg>
+            <h3>Issue</h3>
+          </div>
+          <div class="commit-card">
+            <div class="commit-message" style="font-size: 1rem; margin-bottom: 8px;">${escapeHtml(issue.title || 'Untitled')}</div>
+            <div class="commit-meta" style="margin-bottom: 12px;">
+              <span>#${issue.number || ''}</span>
+              <span>${issue.state || ''}</span>
+            </div>
+            ${issue.body ? `<p style="color: var(--text-secondary); font-size: 0.875rem;">${escapeHtml(issue.body.substring(0, 200))}${issue.body.length > 200 ? '...' : ''}</p>` : ''}
+          </div>
+        </div>
+        <div class="detail-section">
+          <a href="${issue.html_url}" target="_blank" class="compare-link">
+            <svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 9.5a1.5 1.5 0 100-3 1.5 1.5 0 000 3z"/></svg>
+            View Issue on GitHub
+          </a>
+        </div>
+        ${renderRepoCard(payload.repository)}
+      `;
+    }
+
+    // Render ping event
+    function renderPingEvent(payload) {
+      const hook = payload.hook || {};
+
+      return `
+        <div class="detail-section">
+          <div class="detail-section-header">
+            <svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 5.5a2.5 2.5 0 100 5 2.5 2.5 0 000-5z"/></svg>
+            <h3>Webhook Configuration</h3>
+          </div>
+          <div class="commit-card">
+            <div class="commit-message" style="font-size: 1rem; margin-bottom: 8px;">${payload.zen || 'Webhook ping received'}</div>
+            <div class="webhook-info" style="margin-top: 16px; background: var(--bg-secondary);">
+              <div class="webhook-info-row">
+                <span class="label">Hook ID</span>
+                <span class="value">${payload.hook_id || '-'}</span>
+              </div>
+              <div class="webhook-info-row">
+                <span class="label">Events</span>
+                <span class="value">${(hook.events || []).join(', ') || 'all'}</span>
+              </div>
+              <div class="webhook-info-row">
+                <span class="label">Active</span>
+                <span class="value">${hook.active ? 'Yes' : 'No'}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        ${renderRepoCard(payload.repository)}
+      `;
+    }
+
+    // Render generic payload
+    function renderGenericPayload(payload) {
+      return `
+        <div class="detail-section">
+          <div class="detail-section-header">
+            <svg viewBox="0 0 16 16" fill="currentColor"><path d="M0 1.75C0 .784.784 0 1.75 0h12.5C15.216 0 16 .784 16 1.75v12.5A1.75 1.75 0 0114.25 16H1.75A1.75 1.75 0 010 14.25V1.75z"/></svg>
+            <h3>Event Data</h3>
+          </div>
+        </div>
+        ${renderRepoCard(payload.repository)}
+      `;
+    }
+
+    // Render webhook info
+    function renderWebhookInfo(event) {
+      return `
+        <div class="detail-section">
+          <div class="detail-section-header">
+            <svg viewBox="0 0 16 16" fill="currentColor"><path d="M8.878.392a1.75 1.75 0 00-1.756 0l-5.25 3.045A1.75 1.75 0 001 4.951v6.098c0 .624.332 1.2.872 1.514l5.25 3.045a1.75 1.75 0 001.756 0l5.25-3.045c.54-.313.872-.89.872-1.514V4.951c0-.624-.332-1.2-.872-1.514L8.878.392z"/></svg>
+            <h3>Delivery Info</h3>
+          </div>
+          <div class="webhook-info">
+            <div class="webhook-info-row">
+              <span class="label">Event ID</span>
+              <span class="value">${event.id || '-'}</span>
+            </div>
+            <div class="webhook-info-row">
+              <span class="label">Delivery ID</span>
+              <span class="value">${event.delivery_id || '-'}</span>
+            </div>
+            <div class="webhook-info-row">
+              <span class="label">Hook ID</span>
+              <span class="value">${event.hook_id || '-'}</span>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    // Render raw JSON section
+    function renderRawJsonSection(payload) {
+      return `
+        <div class="detail-section">
+          <div class="payload-tabs">
+            <button class="payload-tab" onclick="toggleRawJson(this)">View Raw JSON</button>
+          </div>
+          <div class="payload-content" id="raw-json-content">
+            <pre class="payload-json">${JSON.stringify(payload, null, 2)}</pre>
+          </div>
+        </div>
+      `;
+    }
+
+    // Toggle raw JSON visibility
+    function toggleRawJson(btn) {
+      const content = document.getElementById('raw-json-content');
+      btn.classList.toggle('active');
+      content.classList.toggle('active');
+    }
+
+    // Setup payload tabs
+    function setupPayloadTabs() {
+      // Tabs are handled by onclick handlers
+    }
+
+    // Helper: Get file name from path
+    function getFileName(path) {
+      return path.split('/').pop();
+    }
+
+    // Helper: Escape HTML
+    function escapeHtml(text) {
+      if (!text) return '';
+      const div = document.createElement('div');
+      div.textContent = text;
+      return div.innerHTML;
     }
 
     // Close modal
